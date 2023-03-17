@@ -1,10 +1,12 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
 
-import { COLORS, WEIGHTS } from '../../constants';
-import Logo from '../Logo';
-import SuperHeader from '../SuperHeader';
-import MobileMenu from '../MobileMenu';
+import { COLORS, QUERIES, WEIGHTS } from "../../constants";
+import Logo from "../Logo";
+import SuperHeader from "../SuperHeader";
+import MobileMenu from "../MobileMenu";
+import Icon from "../Icon";
+import UnstyledButton from "../UnstyledButton";
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -18,18 +20,29 @@ const Header = () => {
     <header>
       <SuperHeader />
       <MainHeader>
-        <Side>
+        <LeftSide>
           <Logo />
-        </Side>
-        <Nav>
+        </LeftSide>
+        <BigScreenNav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
           <NavLink href="/men">Men</NavLink>
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
-        </Nav>
-        <Side />
+        </BigScreenNav>
+        <SmallScreenNav>
+          <UnstyledButton>
+            <Icon id="shopping-bag" />
+          </UnstyledButton>
+          <UnstyledButton>
+            <Icon id="search" />
+          </UnstyledButton>
+          <UnstyledButton>
+            <Icon id="menu" />
+          </UnstyledButton>
+        </SmallScreenNav>
+        <RightSide />
       </MainHeader>
 
       <MobileMenu
@@ -46,16 +59,55 @@ const MainHeader = styled.div`
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+
+  @media ${QUERIES.tabletAndDown} {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @media ${QUERIES.phoneAndDown} {
+    padding: 18px 16px;
+  }
 `;
 
-const Nav = styled.nav`
+const BigScreenNav = styled.nav`
   display: flex;
   gap: 48px;
   margin: 0px 48px;
+
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
 `;
 
-const Side = styled.div`
+const SmallScreenNav = styled.div`
+  display: none;
+
+  @media ${QUERIES.tabletAndDown} {
+    display: flex;
+    gap: 32px;
+  }
+
+  @media ${QUERIES.phoneAndDown} {
+    display: flex;
+    gap: 16px;
+  }
+`;
+
+const LeftSide = styled.div`
   flex: 1;
+
+  @media ${QUERIES.tabletAndDown} {
+    flex: revert;
+  }
+`;
+
+const RightSide = styled.div`
+  flex: 1;
+
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
 `;
 
 const NavLink = styled.a`
