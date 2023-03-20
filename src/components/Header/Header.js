@@ -54,6 +54,7 @@ const MainHeader = styled.div`
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+  overflow-x: auto;
 
   @media ${QUERIES.tabletAndDown} {
     justify-content: space-between;
@@ -67,7 +68,7 @@ const MainHeader = styled.div`
 
 const BigScreenNav = styled.nav`
   display: flex;
-  gap: 48px;
+  gap: clamp(1.5rem, 10vw - 4.75rem, 5rem);
   margin: 0px 48px;
 
   @media ${QUERIES.tabletAndDown} {
